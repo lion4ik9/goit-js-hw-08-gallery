@@ -89,20 +89,34 @@ const galleryItems = [
     ul.appendChild(li);
   }
 
-  let modal = document.querySelector('.lightbox')
-  let modalImg = document.querySelector('.lightbox__image')
+  let modal = document.querySelector('.lightbox');
+  let modalImg = document.querySelector('.lightbox__image');
 
   ul.addEventListener('click', (event) => {
     if (event.target.classList.contains('gallery__image')) {
       const originalImg = event.target.dataset.source;
-      modal.classList.add('is-open')
+      modal.classList.add('is-open');
       modalImg.src = originalImg;
     }
     
-  })
+  });
 
   let buttonClose = document.querySelector('[data-action]')
   buttonClose.addEventListener('click', () => {
-    modal.classList.remove('is-open')
+    modal.classList.remove('is-open');
     modalImg.src = '';
-  })
+  });
+
+  let overLay = document.querySelector('.lightbox__overlay')
+
+  overLay.addEventListener('click', () => {
+    modal.classList.remove('is-open');
+    modalImg.src = '';
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.code === 'Escape') {
+      modal.classList.remove('is-open');
+    modalImg.src = '';
+    }
+  });
